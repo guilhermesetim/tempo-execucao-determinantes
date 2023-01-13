@@ -39,7 +39,7 @@ int Sarrus::sentidoPositivo() {
         somatorio+= multiplicacao;
         ++coluna;
     }
-    std::cout << "Positivo: " << somatorio << std::endl;
+
     return somatorio;
  
 }
@@ -57,7 +57,7 @@ int Sarrus::sentidoNegativo() {
         somatorio+= multiplicacao;
         ++coluna;
     }
-    std::cout << "Negativo: " << somatorio << std::endl;
+
     return somatorio;
     
 }

@@ -23,7 +23,6 @@ int Triangulo::sentidoPositivo() {
     somatorio+= m[0][1] * m[1][2] * m[2][0];
     somatorio+= m[0][2] * m[1][0] * m[2][1];
 
-    std::cout << "Positivo: " << somatorio << std::endl;
     return somatorio;
 }
 
@@ -34,7 +33,6 @@ int Triangulo::sentidoNegativo() {
     somatorio+= m[1][2] * m[2][1] * m[0][0];
     somatorio+= m[2][2] * m[0][1] * m[1][0];
 
-    std::cout << "Negativo: " << somatorio << std::endl;
     return somatorio;
 }
 
