@@ -8,7 +8,6 @@ private:
 
 public:
     Sarrus(int matrizQ[3][3]);
-    Sarrus(int matrizQ[2][2]);
     int getResultado() const;
 
 private:
