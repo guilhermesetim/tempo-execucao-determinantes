@@ -1,14 +1,14 @@
 #include "../include/Sarrus.hpp"
 #include <iostream>
 
-Sarrus::Sarrus(int matrizQ[3][3]) {
+Sarrus::Sarrus(float matrizQ[3][3]) {
     this->setMatriz(matrizQ);
     this->complemento(matrizQ);
     this->resultado = sentidoPositivo() - sentidoNegativo();
 }
 
 
-void Sarrus::complemento(int matriz[3][3]) {
+void Sarrus::complemento(float matriz[3][3]) {
     for (int l = 0; l < 3; l++) {
         this->matriz[l][3] = matriz[l][0];
         this->matriz[l][4] = matriz[l][1];
@@ -16,7 +16,7 @@ void Sarrus::complemento(int matriz[3][3]) {
    
 }
 
-void Sarrus::setMatriz(int matrizQ[3][3]) {
+void Sarrus::setMatriz(float matrizQ[3][3]) {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             this->matriz[i][j] = matrizQ[i][j];
@@ -25,9 +25,9 @@ void Sarrus::setMatriz(int matrizQ[3][3]) {
 }
 
 
-int Sarrus::sentidoPositivo() {
+float Sarrus::sentidoPositivo() {
 
-    int somatorio = 0;
+    float somatorio = 0;
     int coluna = 0;
 
     while(coluna < 3) {
@@ -44,8 +44,8 @@ int Sarrus::sentidoPositivo() {
  
 }
 
-int Sarrus::sentidoNegativo() {
-    int somatorio = 0;
+float Sarrus::sentidoNegativo() {
+    float somatorio = 0;
     int coluna = 2;
 
     while(coluna < 5) {
@@ -62,6 +62,6 @@ int Sarrus::sentidoNegativo() {
     
 }
 
-int Sarrus::getResultado() const {
+float Sarrus::getResultado() const {
     return resultado;
 }

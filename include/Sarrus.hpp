@@ -3,16 +3,16 @@
 class Sarrus 
 {
 private:
-    int matriz[3][5];
-    int resultado;
+    float matriz[3][5];
+    float resultado;
 
 public:
-    Sarrus(int matrizQ[3][3]);
-    int getResultado() const;
+    Sarrus(float matrizQ[3][3]);
+    float getResultado() const;
 
 private:
-    void setMatriz(int matrizQ[3][3]);
-    void complemento(int matriz[3][3]);
-    int sentidoPositivo();
-    int sentidoNegativo();
+    void setMatriz(float matrizQ[3][3]);
+    void complemento(float matriz[3][3]);
+    float sentidoPositivo();
+    float sentidoNegativo();
 };

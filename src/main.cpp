@@ -3,22 +3,39 @@
 
 #include "../include/Sarrus.hpp"
 #include "../include/Triangulo.hpp"
+#include "../include/Jacob.hpp"
 
 using namespace std::chrono;
 using namespace std;
 
 int main() {
 
-    int matriz1[3][3] = { 
+    float matriz1[3][3] = { 
         {4,5,-3},
         {2,1,0},
         {3,-1,1} 
     };
-    int matriz2[3][3] = { 
+    float matriz2[3][3] = { 
         {1,3,2},
         {-1,0,-2},
         {2,5,1} 
     };
+    float matriz3[3][3] = { 
+        {5,2,-2},
+        {0,2,4},
+        {4,3,-3} 
+    };
+
+
+    Jacob jacob1(matriz1);
+    cout << matriz1[0][0] << " " << matriz1[0][1] << " " << matriz1[0][2] << endl;
+    cout << matriz1[1][0] << " " << matriz1[1][1] << " " << matriz1[1][2] << endl;
+    cout << matriz1[2][0] << " " << matriz1[2][1] << " " << matriz1[2][2] << endl;
+    cout << endl;
+    Jacob jacob2(matriz2);
+    cout << matriz2[0][0] << " " << matriz2[0][1] << " " << matriz2[0][2] << endl;
+    Jacob jacob3(matriz3);
+    cout << matriz3[0][0] << " " << matriz3[0][1] << " " << matriz3[0][2]<< endl;
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -26,6 +43,7 @@ int main() {
     //cout << "Determinante: " << sarrus1.getResultado() << endl;
     Sarrus sarrus2(matriz2);
     //cout << "Determinante: " << sarrus2.getResultado() << endl;
+
 
     auto stop = high_resolution_clock::now();
     std::chrono::nanoseconds duracao = duration_cast<nanoseconds>(stop - start);
