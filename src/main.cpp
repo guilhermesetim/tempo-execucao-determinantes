@@ -6,6 +6,7 @@
 #include "../include/Jacob.hpp"
 #include "../include/Laplace.hpp"
 #include "../include/Chio.hpp"
+#include "../include/Gauss.hpp"
 
 using namespace std::chrono;
 using namespace std;
@@ -48,10 +49,32 @@ int main() {
         {0,2,1,1} 
     };
 
-    Laplace laplace(matrizLaplace);
+    float matrizGauss[4][4] = { 
+        {1,3,5,8},
+        {2,2,2,6},
+        {3,1,1,5},
+        {2,2,1,1} 
+    };
 
-    Chio chio1(matrizChio);
-    Chio chio2(matrizLaplace);
+    Laplace laplace1(matrizLaplace);
+    Laplace laplace2(matrizChio);
+    Laplace laplace3(matrizGauss);
+
+    Chio chio1(matrizLaplace);
+    Chio chio2(matrizChio);
+    Chio chio3(matrizGauss);
+
+    Gauss gauss1(matrizLaplace);
+    Gauss gauss2(matrizChio);
+    Gauss gauss3(matrizGauss);
+    
+    
+    
+    
+
+    
+
+   
 
 
     auto start = chrono::high_resolution_clock::now();

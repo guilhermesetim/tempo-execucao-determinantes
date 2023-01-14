@@ -10,6 +10,9 @@ Laplace::Laplace(float matriz[4][4]) {
         float cofator = this->cofator(i, colEscolhida, matriz);
         determinante += matriz[i][colEscolhida] * cofator;
     }
+
+    this->resultado = determinante;
+    std::cout << "Laplace: " << resultado << std::endl;
     
 }
 

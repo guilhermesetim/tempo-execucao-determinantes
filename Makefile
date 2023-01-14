@@ -10,6 +10,7 @@ compiliar:
 	g++ -c ./src/Jacob.cpp -o ./obj/Jacob.o
 	g++ -c ./src/Laplace.cpp -o ./obj/Laplace.o
 	g++ -c ./src/Chio.cpp -o ./obj/Chio.o
+	g++ -c ./src/Gauss.cpp -o ./obj/Gauss.o
 
 linkar:
 	g++ ./obj/*.o -o ./bin/main.out
