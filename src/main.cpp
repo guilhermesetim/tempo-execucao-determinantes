@@ -33,19 +33,21 @@ int main() {
         {0,1,2} 
     };
 
-    Laplace laplace(matriz4);
-    cout << "Laplace: " << laplace.cofator(0,0,matriz4) << endl;
+    float matrizLaplace[4][4] = { 
+        {3,1,0,1},
+        {0,-1,3,4},
+        {1,1,0,2},
+        {0,1,1,-1} 
+    };
+
+    Laplace laplace(1,2,matrizLaplace);
+    //cout << "Laplace: " << laplace.cofator(0,0,matriz4) << endl;
 
 
     Jacob jacob1(matriz1);
-    cout << matriz1[0][0] << " " << matriz1[0][1] << " " << matriz1[0][2] << endl;
-    cout << matriz1[1][0] << " " << matriz1[1][1] << " " << matriz1[1][2] << endl;
-    cout << matriz1[2][0] << " " << matriz1[2][1] << " " << matriz1[2][2] << endl;
     cout << endl;
-    Jacob jacob2(matriz2);
-    cout << matriz2[0][0] << " " << matriz2[0][1] << " " << matriz2[0][2] << endl;
-    Jacob jacob3(matriz3);
-    cout << matriz3[0][0] << " " << matriz3[0][1] << " " << matriz3[0][2]<< endl;
+
+
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -58,7 +60,7 @@ int main() {
     auto stop = high_resolution_clock::now();
     std::chrono::nanoseconds duracao = duration_cast<nanoseconds>(stop - start);
 
-    cout << "Duracao Sarrus: " << duracao.count() << endl;
+    //cout << "Duracao Sarrus: " << duracao.count() << endl;
 
     start = chrono::high_resolution_clock::now();
     Triangulo triangulo1(matriz1);
@@ -68,7 +70,7 @@ int main() {
     stop = high_resolution_clock::now();
     std::chrono::nanoseconds duracaoT = duration_cast<nanoseconds>(stop - start);
 
-    cout << "Duracao Triangulo: " << duracaoT.count() << endl;
+    //cout << "Duracao Triangulo: " << duracaoT.count() << endl;
 
 
     
