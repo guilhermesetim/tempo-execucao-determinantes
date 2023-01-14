@@ -5,6 +5,7 @@
 #include "../include/Triangulo.hpp"
 #include "../include/Jacob.hpp"
 #include "../include/Laplace.hpp"
+#include "../include/Chio.hpp"
 
 using namespace std::chrono;
 using namespace std;
@@ -40,13 +41,17 @@ int main() {
         {0,1,1,-1} 
     };
 
+    float matrizChio[4][4] = { 
+        {1,-4,0,0},
+        {0,1,3,0},
+        {3,2,1,-1},
+        {0,2,1,1} 
+    };
+
     Laplace laplace(matrizLaplace);
-    //cout << "Laplace: " << laplace.cofator(0,0,matriz4) << endl;
 
-
-    Jacob jacob1(matriz1);
-    cout << endl;
-
+    Chio chio1(matrizChio);
+    Chio chio2(matrizLaplace);
 
 
     auto start = chrono::high_resolution_clock::now();

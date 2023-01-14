@@ -1,4 +1,5 @@
-
+#ifndef SARRUS
+#define SARRUS
 
 class Sarrus 
 {
@@ -16,3 +17,5 @@ private:
     float sentidoPositivo();
     float sentidoNegativo();
 };
+
+#endif

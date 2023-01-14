@@ -1,3 +1,6 @@
+#ifndef TRIANGULO
+#define TRIANGULO
+
 class Triangulo
 {
 private:
@@ -13,3 +16,5 @@ private:
     float sentidoNegativo();
     void setMatriz(float _matriz[3][3]);
 };
+
+#endif

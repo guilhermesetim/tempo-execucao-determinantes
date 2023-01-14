@@ -9,6 +9,7 @@ compiliar:
 	g++ -c ./src/Triangulo.cpp -o ./obj/Triangulo.o
 	g++ -c ./src/Jacob.cpp -o ./obj/Jacob.o
 	g++ -c ./src/Laplace.cpp -o ./obj/Laplace.o
+	g++ -c ./src/Chio.cpp -o ./obj/Chio.o
 
 linkar:
 	g++ ./obj/*.o -o ./bin/main.out
