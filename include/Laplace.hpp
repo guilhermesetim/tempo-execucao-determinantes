@@ -9,14 +9,13 @@ private:
 
 public:
     
-    Laplace(int l, int c, float matriz[4][4]);
+    Laplace(float matriz[4][4]);
+
+private:
     void matriz3(int l, int c, float _matriz[4][4]);
     float cofator(int l, int c, float matriz[4][4]);
     float sarrus(float matriz[3][3]);
     int coordRandomica();
-
-private:
-   
 };
 
 #endif

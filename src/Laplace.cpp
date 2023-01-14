@@ -1,11 +1,14 @@
 #include "../include/Laplace.hpp"
 #include <iostream>
 
-Laplace::Laplace(int l, int c, float matriz[4][4]) {
+Laplace::Laplace(float matriz[4][4]) {
+
+    int colEscolhida = coordRandomica();
+
     float determinante = 0;
     for(int i = 0; i < 4; i++) {
-        float cofator = this->cofator(i, 2, matriz);
-        determinante += matriz[i][2] * cofator;
+        float cofator = this->cofator(i, colEscolhida, matriz);
+        determinante += matriz[i][colEscolhida] * cofator;
     }
 
     std::cout << "Determinante: " << determinante << std::endl;
@@ -76,8 +79,6 @@ float Laplace::sarrus(float matriz[3][3]) {
 
 
 
-
-
 float Laplace::cofator(int l, int c, float matriz[4][4]) {
 
     int _C;
@@ -93,4 +94,11 @@ float Laplace::cofator(int l, int c, float matriz[4][4]) {
 
     return (_C * _D);
     
+}
+
+int Laplace::coordRandomica() {
+    srand(time(NULL));
+    int numeroAleatorio = rand() % 4;
+
+    return numeroAleatorio;
 }

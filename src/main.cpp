@@ -40,7 +40,7 @@ int main() {
         {0,1,1,-1} 
     };
 
-    Laplace laplace(1,2,matrizLaplace);
+    Laplace laplace(matrizLaplace);
     //cout << "Laplace: " << laplace.cofator(0,0,matriz4) << endl;
 
 
