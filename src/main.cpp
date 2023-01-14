@@ -4,6 +4,7 @@
 #include "../include/Sarrus.hpp"
 #include "../include/Triangulo.hpp"
 #include "../include/Jacob.hpp"
+#include "../include/Laplace.hpp"
 
 using namespace std::chrono;
 using namespace std;
@@ -25,6 +26,15 @@ int main() {
         {0,2,4},
         {4,3,-3} 
     };
+
+    float matriz4[3][3] = { 
+        {3,1,0},
+        {-2,2,3},
+        {0,1,2} 
+    };
+
+    Laplace laplace(matriz4);
+    cout << "Laplace: " << laplace.cofator(0,0,matriz4) << endl;
 
 
     Jacob jacob1(matriz1);
@@ -59,6 +69,9 @@ int main() {
     std::chrono::nanoseconds duracaoT = duration_cast<nanoseconds>(stop - start);
 
     cout << "Duracao Triangulo: " << duracaoT.count() << endl;
+
+
+    
 
 
     return 0;

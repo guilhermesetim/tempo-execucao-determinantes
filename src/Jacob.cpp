@@ -12,7 +12,7 @@ Jacob::Jacob(float m[3][3]) {
         l = 2;
     }
 
-    x = (float)((1 -m[0][0]) / (float)m[l][0]);
+    x = (float)((1 - m[0][0]) / (float)m[l][0]);
 
     std::cout << "x: " << x << std::endl;
 
