@@ -16,7 +16,28 @@ void gerarTestes(int qTestes);
 int numRandomico(int numero);
 
 int main() {
-    
+
+    float usuario[5][5] = {
+        {1,-1,0,3,2},
+        {1,3,2,0,-2},
+        {-1,2,-1,-5,4},
+        {2,3,2,-2,0},
+        {4,4,-2,-1,3}
+    };
+
+    vector<vector<float>> matrizN;
+    for(int i = 0; i < 5; i++) {
+        vector<float> linha;
+        for (int j = 0; j < 5; j++) {
+            
+            linha.push_back(usuario[i][j]);
+        }
+        matrizN.push_back(linha);
+    }
+
+    Chio chio(matrizN);
+
+/*    
     int quantTestes = 10,
         numTeste = 1;
 
@@ -36,14 +57,14 @@ int main() {
     gerarTestes(quantTestes);
     
 
-    /*  Testes  */
+    //  Testes  
     while (numTeste <= quantTestes) {
 
         float m[4][4];
         string arquivoTeste = "./csv/input/teste" + to_string(numTeste) + ".csv";
         transformarCSVtoMatriz(arquivoTeste, m);
 
-        /*  Inserir elementos nas matrizes */
+        //  Inserir elementos nas matrizes 
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 mLaplace[i][j] = m[i][j];
@@ -77,7 +98,7 @@ int main() {
     }
 
 
-    /* criação do arquivo .csv com os registros de tempo */
+    // criação do arquivo .csv com os registros de tempo 
     ofstream arquivoCSV;
     arquivoCSV.open("Tempo-Determinantes.csv", ios::trunc);
     string tabela =  "Tempo execução determinante \nteste, LaPlace, Chio, Eliminacao Gauss \n";
@@ -102,7 +123,7 @@ int main() {
     cout << "Duracao Laplace: " << tempLaplace << endl;
     cout << "Duracao Chio: " << tempChio << endl;
     cout << "Duracao Gauss: " << tempGauss << endl; 
-
+*/
 
     return 0;
 }

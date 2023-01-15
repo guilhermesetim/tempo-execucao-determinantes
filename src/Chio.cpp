@@ -1,6 +1,7 @@
 #include "../include/Chio.hpp"
 #include <iostream>
-
+#include <vector>
+/*
 Chio::Chio(float matriz[4][4]) {
 
     if(matriz[0][0] != 1)
@@ -10,44 +11,102 @@ Chio::Chio(float matriz[4][4]) {
     float det = regra(0,0) * this->sarrus(matrizTemp3);
     this->resultado = det;
 }
+*/
+Chio::Chio(std::vector<std::vector<float>> matrizN) {
 
-void Chio::jacob(float matriz[4][4]) {
+    int ordemMatriz = matrizN[0].size();
+
+    if(matrizN[0][0] != 1)
+        this->jacob(matrizN, ordemMatriz);
+
+    this->sinalCofator *= regra(0,0);
+
+    this->matrizAtual = matrizN;
+
+    while (ordemMatriz > 3)
+    {
+        for(int i = 0; i < ordemMatriz; i++) {
+            for (int j = 0; j < ordemMatriz; j++) {
+                std::cout << this->matrizAtual[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+
+        std::cout << "------------------------------" << std::endl;
+
+        if(this->matrizAtual[0][0] != 1)
+            this->jacob(this->matrizAtual, ordemMatriz);
+        
+        this->sinalCofator *= regra(0,0);
+
+       --ordemMatriz;
+        std::vector<std::vector<float>> matrizSub;
+
+        for (int i = 1; i <= ordemMatriz; ++i) {
+            std::vector<float> linha;
+            for(int j = 1; j <= ordemMatriz; ++j) {
+                float pordCoord = this->matrizAtual[i][0] * this->matrizAtual[0][j];
+                linha.push_back(this->matrizAtual[i][j] - pordCoord);
+            }
+            matrizSub.push_back(linha);
+        }
+
+        this->matrizAtual = matrizSub;
+    }
+    
+    
+
+    
+    for(int i = 0; i < ordemMatriz; i++) {
+        for (int j = 0; j < ordemMatriz; j++) {
+            std::cout << this->matrizAtual[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    this->resultado = sinalCofator * sarrus(this->matrizAtual);
+
+    std::cout << "Determinante: " << this->resultado << std::endl;
+
+    std::cout << "------------------------------" << std::endl;
+
+}
+
+
+void Chio::jacob(std::vector<std::vector<float>>& matriz, int ordemMatriz) {
    
     float x;
     int l;
 
-    if(matriz[1][0] != 0) {
-        l = 1;
+    // verifica se não ocorrerá divisão com denominador zero
+    bool zero = true;
+    for (int i = 1; i < ordemMatriz || zero; ++i) {
+        if(matriz[i][0] != 0) {
+            l = i;
+            zero = false;
+        }
     }
-    else if(matriz[2][0] != 0){
-        l = 2;
-    }
-    else if(matriz[3][0] != 0){
-        l = 3;
-    }
+    
 
     x = (float)((1 - matriz[0][0]) / (float)matriz[l][0]);
 
-    matriz[0][0] += (matriz[l][0] * x);
-    matriz[0][1] += (matriz[l][1] * x);
-    matriz[0][2] += (matriz[l][2] * x);
-    matriz[0][3] += (matriz[l][3] * x);
+    for (int j = 0; j < ordemMatriz; ++j)
+        matriz[0][j] += (matriz[l][j] * x);
+   
+    for(int i = 0; i < ordemMatriz; i++) {
+        for (int j = 0; j < ordemMatriz; j++) {
+            std::cout << this->matrizAtual[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << "^^^^^^^^^^^^^^^^^^" << std::endl;
     
 }
 
 
-void Chio::matriz3(float _matriz[4][4]) {
 
-    for (int i = 1; i < 4; ++i) {
-        for(int j = 1; j < 4; ++j) {
-            float pordCoord = _matriz[i][0] * _matriz[0][j];
-            this->matrizTemp3[i-1][j-1] = _matriz[i][j] - pordCoord;
-        }
-    }
-}
-
-
-float Chio::sarrus(float matriz[3][3]) {
+float Chio::sarrus(std::vector<std::vector<float>> matriz) {
 
     // positivo
     float somatorioPositivo = 0;
@@ -86,6 +145,8 @@ float Chio::sarrus(float matriz[3][3]) {
 
 int Chio::regra(int i, int j) {
     int multiplicador;
+    i+= 1;
+    j += 1;
     // sinal - propriedade de potencia
     ( (i+j) % 2 == 0 ) ? multiplicador = 1 : multiplicador = -1;
     
