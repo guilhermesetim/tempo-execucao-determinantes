@@ -8,6 +8,9 @@ private:
 
 public:
     Gauss(float matriz[4][4]);
+    float getResultado() const;
+
+private:
     void escalonamento(float matriz[4][4], int linhaR, int linhaT);
     float determinante(float matriz[4][4]);
 };

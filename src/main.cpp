@@ -1,9 +1,9 @@
 #include <iostream>
 #include <chrono>
 #include <fstream>
+#include <vector>
+#include <cmath>
 
-#include "../include/Sarrus.hpp"
-#include "../include/Triangulo.hpp"
 #include "../include/Laplace.hpp"
 #include "../include/Chio.hpp"
 #include "../include/Gauss.hpp"
@@ -11,103 +11,109 @@
 using namespace std::chrono;
 using namespace std;
 
-void retornaConteudoArquivo(string _nomeArquivo, float m[4][4]);
+void transformarCSVtoMatriz(string _nomeArquivo, float m[4][4]);
+void gerarTestes(int qTestes);
+int numRandomico(int numero);
 
 int main() {
-/*
-    float matriz1[3][3] = { 
-        {4,5,-3},
-        {2,1,0},
-        {3,-1,1} 
-    };
-    float matriz2[3][3] = { 
-        {1,3,2},
-        {-1,0,-2},
-        {2,5,1} 
-    };
-    float matriz3[3][3] = { 
-        {5,2,-2},
-        {0,2,4},
-        {4,3,-3} 
-    };
-
-    float matriz4[3][3] = { 
-        {3,1,0},
-        {-2,2,3},
-        {0,1,2} 
-    };
-
-    float matrizLaplace[4][4] = { 
-        {3,1,0,1},
-        {0,-1,3,4},
-        {1,1,0,2},
-        {0,1,1,-1} 
-    };
-
-    float matrizChio[4][4] = { 
-        {1,-4,0,0},
-        {0,1,3,0},
-        {3,2,1,-1},
-        {0,2,1,1} 
-    };
-
-    float matrizGauss[4][4] = { 
-        {1,3,5,8},
-        {2,2,2,6},
-        {3,1,1,5},
-        {2,2,1,1} 
-    };
-*/
     
-    float m[4][4], mL[4][4], mC[4][4], mG[4][4];
-    retornaConteudoArquivo("./arquivosCSV/arquivo.csv", m);
+    int quantTestes = 10,
+        numTeste = 1;
 
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            cout << m[i][j] << " ";
-            mL[i][j] = m[i][j];
-            mC[i][j] = m[i][j];
-            mG[i][j] = m[i][j];
+
+    float mLaplace[4][4], 
+          mChio[4][4], 
+          mGauss[4][4];
+
+    double tempLaplace = 0,
+            tempChio = 0,
+            tempGauss = 0;
+
+    vector<int> regLaplace,
+                regChio,
+                regGauss;
+
+    gerarTestes(quantTestes);
+    
+
+    /*  Testes  */
+    while (numTeste <= quantTestes) {
+
+        float m[4][4];
+        string arquivoTeste = "./csv/input/teste" + to_string(numTeste) + ".csv";
+        transformarCSVtoMatriz(arquivoTeste, m);
+
+        /*  Inserir elementos nas matrizes */
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                mLaplace[i][j] = m[i][j];
+                mChio[i][j] = m[i][j];
+                mGauss[i][j] = m[i][j];
+            }
         }
-        cout << endl;
+
+        // LaPlace
+        auto startLaplace = chrono::high_resolution_clock::now();
+        Laplace laplace(mLaplace);
+        auto stopLaplace = high_resolution_clock::now();
+        std::chrono::nanoseconds duracaoLaplace = duration_cast<nanoseconds>(stopLaplace - startLaplace);
+        regLaplace.push_back(duracaoLaplace.count());
+        
+        // Chio
+        auto startChio = chrono::high_resolution_clock::now();
+        Chio chio(mChio);
+        auto stopChio = high_resolution_clock::now();
+        std::chrono::nanoseconds duracaoChio = duration_cast<nanoseconds>(stopChio - startChio);
+        regChio.push_back(duracaoChio.count());
+
+        // Eliminação de Gauss
+        auto startGauss = chrono::high_resolution_clock::now();
+        Gauss gauss(mGauss);
+        auto stopGauss = high_resolution_clock::now();
+        std::chrono::nanoseconds duracaoGauss = duration_cast<nanoseconds>(stopGauss - startGauss);
+        regGauss.push_back(duracaoGauss.count());
+
+        numTeste++;
     }
 
 
-    auto start = chrono::high_resolution_clock::now();
-    Laplace laplace1(mL);
-    auto stop = high_resolution_clock::now();
-    std::chrono::nanoseconds duracaoLaplace = duration_cast<nanoseconds>(stop - start);
-    cout << "Duracao Laplace: " << duracaoLaplace.count() << endl;
+    /* criação do arquivo .csv com os registros de tempo */
+    ofstream arquivoCSV;
+    arquivoCSV.open("Tempo-Determinantes.csv", ios::trunc);
+    string tabela =  "Tempo execução determinante \nteste, LaPlace, Chio, Eliminacao Gauss \n";
+
+    // grava registros em arquivo .csv
+    for (int t = 0; t < quantTestes; t++) {
+        string registro = to_string(t+1) + ", "
+                        + to_string(regLaplace[t]) + ", " 
+                        + to_string(regChio[t]) + ", " 
+                        + to_string(regGauss[t]) + '\n';
+        
+        tabela += registro;
+        tempLaplace += regLaplace[t]; 
+        tempChio += regChio[t]; 
+        tempGauss += regGauss[t];
+    }
+    // registra no arquivo
+    arquivoCSV << tabela;
+    arquivoCSV.close();
     
-
-    start = chrono::high_resolution_clock::now();
-    Chio chio1(mC);
-    stop = high_resolution_clock::now();
-    std::chrono::nanoseconds duracaoChio = duration_cast<nanoseconds>(stop - start);
-    cout << "Duracao Chio: " << duracaoChio.count() << endl;
-
-
-    start = chrono::high_resolution_clock::now();
-    Gauss gauss1(mG);
-    stop = high_resolution_clock::now();
-    std::chrono::nanoseconds duracaoGauss = duration_cast<nanoseconds>(stop - start);
-    cout << "Duracao Gauss: " << duracaoGauss.count() << endl;
-    
-       
+    // resultados
+    cout << "Duracao Laplace: " << tempLaplace << endl;
+    cout << "Duracao Chio: " << tempChio << endl;
+    cout << "Duracao Gauss: " << tempGauss << endl; 
 
 
     return 0;
 }
 
 
-void retornaConteudoArquivo(string _nomeArquivo, float m[4][4])
+void transformarCSVtoMatriz(string _nomeArquivo, float m[4][4])
 {
-    std::ifstream leitura(_nomeArquivo.c_str()); //abre o arquivo
+    std::ifstream leitura(_nomeArquivo.c_str());
    
+    if(leitura) {
 
-    if(leitura)
-    {
-      
         for(int i = 0; i < 4; i++) {
 
             string linha, valorTabela = "";
@@ -134,9 +140,40 @@ void retornaConteudoArquivo(string _nomeArquivo, float m[4][4])
         }
     }
     else
-        cout << "Arquivo não existe!!";
+        cout << "Arquivo " << _nomeArquivo << " não existe!!";
 
-
-    leitura.close(); //fecha o arquivo
+    leitura.close(); 
  
+}
+
+
+
+void gerarTestes(int qTestes) {
+    /* criação do arquivo .csv com os registros de tempo */
+    ofstream arquivoCSV;
+
+    // grava registros em arquivo .csv
+    for (int i = 1; i <= qTestes; i++) {
+        string registro = "";
+        string nomeTeste = "./csv/input/teste" + to_string(i) + ".csv";
+        arquivoCSV.open(nomeTeste, ios::trunc);
+
+        for (int l = 1; l <= 4; ++l) {
+            registro += to_string(numRandomico(i*l+3)) + ","
+                    + to_string(numRandomico(i*l+7)) + ","
+                    + to_string(numRandomico(i*l+5)) + ","
+                    + to_string(numRandomico(i*l+13)) + "\n";
+        }  
+        // registra no arquivo
+        arquivoCSV << registro;
+        arquivoCSV.close();
+    }
+    
+}
+
+int numRandomico(int numero) {
+    srand(time(NULL));
+    int numeroAleatorio =  ( 3 * (rand() * numero) ) % 10;
+
+    return numeroAleatorio ;
 }

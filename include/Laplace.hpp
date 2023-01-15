@@ -8,8 +8,8 @@ private:
     float matrizTemp3[3][3];
 
 public:
-    
     Laplace(float matriz[4][4]);
+    float getResultado() const;
 
 private:
     void matriz3(int l, int c, float _matriz[4][4]);

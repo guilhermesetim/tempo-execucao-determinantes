@@ -9,7 +9,6 @@ Chio::Chio(float matriz[4][4]) {
     this->matriz3(matriz);
     float det = regra(0,0) * this->sarrus(matrizTemp3);
     this->resultado = det;
-    std::cout << "chio: "<<resultado << std::endl;
 }
 
 void Chio::jacob(float matriz[4][4]) {
@@ -91,4 +90,8 @@ int Chio::regra(int i, int j) {
     ( (i+j) % 2 == 0 ) ? multiplicador = 1 : multiplicador = -1;
     
     return multiplicador;
+}
+
+float Chio::getResultado() const {
+    return this->resultado;
 }

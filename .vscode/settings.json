@@ -57,5 +57,12 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/guilhermesetim/Documents/Projetos-GitHub/calculo-determinantes/bin",
+            "binaryPath": "/home/guilhermesetim/Documents/Projetos-GitHub/calculo-determinantes/bin/main.out",
+            "binaryArgs": []
+        }
+    ]
 }

@@ -10,9 +10,6 @@ Gauss::Gauss(float matriz[4][4]) {
     }
 
     this->resultado = determinante(matriz);
-
-    std::cout << "Gauss: " << resultado << std::endl;
-
 }
 
 void Gauss::escalonamento(float matriz[4][4], int linhaR, int linhaT) {
@@ -35,4 +32,8 @@ float Gauss::determinante(float matriz[4][4]) {
 
     return det;
 
+}
+
+float Gauss::getResultado() const {
+    return this->resultado;
 }

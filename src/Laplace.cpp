@@ -11,9 +11,7 @@ Laplace::Laplace(float matriz[4][4]) {
         determinante += matriz[i][colEscolhida] * cofator;
     }
 
-    this->resultado = determinante;
-    std::cout << "Laplace: " << resultado << std::endl;
-    
+    this->resultado = determinante;    
 }
 
 void Laplace::matriz3(int l, int c, float _matriz[4][4]) {
@@ -102,4 +100,8 @@ int Laplace::coordRandomica() {
     int numeroAleatorio = rand() % 4;
 
     return numeroAleatorio;
+}
+
+float Laplace::getResultado() const {
+    return this->resultado;
 }

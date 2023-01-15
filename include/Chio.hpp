@@ -9,6 +9,7 @@ private:
 
 public:
     Chio(float matriz[4][4]);
+    float getResultado() const;
 
 private:
     float sarrus(float matriz[3][3]);
