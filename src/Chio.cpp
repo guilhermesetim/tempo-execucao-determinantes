@@ -16,15 +16,6 @@ Chio::Chio(std::vector<std::vector<float>> matrizN) {
 
     while (ordemMatriz > 3)
     {
-        for(int i = 0; i < ordemMatriz; i++) {
-            for (int j = 0; j < ordemMatriz; j++) {
-                std::cout << this->matrizAtual[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }
-
-        std::cout << "------------------------------" << std::endl;
-
         if(this->matrizAtual[0][0] != 1)
             this->jacob(this->matrizAtual, ordemMatriz);
         
@@ -44,23 +35,8 @@ Chio::Chio(std::vector<std::vector<float>> matrizN) {
 
         this->matrizAtual = matrizSub;
     }
-    
-    
-
-    
-    for(int i = 0; i < ordemMatriz; i++) {
-        for (int j = 0; j < ordemMatriz; j++) {
-            std::cout << this->matrizAtual[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
 
     this->resultado = sinalCofator * sarrus(this->matrizAtual);
-
-    std::cout << "Determinante: " << this->resultado << std::endl;
-
-    std::cout << "------------------------------" << std::endl;
-
 }
 
 
@@ -82,17 +58,7 @@ void Chio::jacob(std::vector<std::vector<float>>& matriz, int ordemMatriz) {
     x = (float)((1 - matriz[0][0]) / (float)matriz[l][0]);
 
     for (int j = 0; j < ordemMatriz; ++j)
-        matriz[0][j] += (matriz[l][j] * x);
-   
-    for(int i = 0; i < ordemMatriz; i++) {
-        for (int j = 0; j < ordemMatriz; j++) {
-            std::cout << this->matrizAtual[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << "^^^^^^^^^^^^^^^^^^" << std::endl;
-    
+        matriz[0][j] += (matriz[l][j] * x);   
 }
 
 

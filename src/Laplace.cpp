@@ -26,16 +26,7 @@ Laplace::Laplace(std::vector<std::vector<float>> matrizN) {
                 }
                 matrizSub.push_back(linha);
             }
-        }
-
-        for(int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                std::cout << matrizSub[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }
-        std::cout << "---------- 4x4 ------------" << std::endl;
-        
+        }        
 
         this->matrizAtual = matrizSub;
 
@@ -45,8 +36,6 @@ Laplace::Laplace(std::vector<std::vector<float>> matrizN) {
             float cofator = this->cofator(i, 0);
             this->matriz3(i,0,this->matrizAtual);
             float D = this->sarrus(this->matriz3x3);
-            std::cout << "det da funcao: " << matrizAtual[i][0] * (cofator * D)
-                    << "   valor da matriz: " << matrizAtual[i][0] << std::endl;
             det += matrizAtual[i][0] * (cofator * D);
         }
         determinante += matrizN[lMaster][0] * (cofator(lMaster, 0) * det);
@@ -80,14 +69,6 @@ void Laplace::matriz3(int l, int c, std::vector<std::vector<float>> matriz) {
     }
 
     this->matriz3x3 = _matrizTemp;
-
-    for(int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            std::cout << this->matriz3x3[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "********** 3x3 *********" << std::endl;
 }
 
 
