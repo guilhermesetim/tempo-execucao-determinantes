@@ -12,7 +12,7 @@ using namespace std::chrono;
 using namespace std;
 
 vector<vector<float>> transformarCSVtoMatriz(string _nomeArquivo, int ordem);
-void gerarTestes(int qTestes);
+void gerarTestes(int qTestes, int ordem);
 int numRandomico(int numero);
 
 int main() {
@@ -20,14 +20,6 @@ int main() {
 
     int quantTestes = 10,
         numTeste = 1;
-
-     float usuario[5][5] = {
-        {1,-1,0,3,2},
-        {1,3,2,0,-2},
-        {-1,2,-1,-5,4},
-        {2,3,2,-2,0},
-        {4,4,-2,-1,3}
-    };
 
     double tempLaplace = 0,
             tempChio = 0,
@@ -37,15 +29,14 @@ int main() {
                 regChio,
                 regGauss;
 
-    //gerarTestes(quantTestes);
+    gerarTestes(quantTestes, 5);
     
 
     //  Testes  
     while (numTeste <= quantTestes) {
 
-        //float m[4][4];
-        //string arquivoTeste = "./csv/input/teste" + to_string(numTeste) + ".csv";
-        string arquivoTeste = "./csv/input/matriz5.csv";
+        string arquivoTeste = "./csv/input/teste" + to_string(numTeste) + ".csv";
+        //string arquivoTeste = "./csv/input/matriz5.csv";
         vector<vector<float>> arqCSV = transformarCSVtoMatriz(arquivoTeste, 5);
 
         
@@ -166,7 +157,7 @@ int main() {
 
 
 
-void gerarTestes(int qTestes) {
+void gerarTestes(int qTestes, int ordem) {
     /* criação do arquivo .csv com os registros de tempo */
     ofstream arquivoCSV;
 
@@ -176,12 +167,17 @@ void gerarTestes(int qTestes) {
         string nomeTeste = "./csv/input/teste" + to_string(i) + ".csv";
         arquivoCSV.open(nomeTeste, ios::trunc);
 
-        for (int l = 1; l <= 4; ++l) {
-            registro += to_string(numRandomico(i*l+3)) + ","
-                    + to_string(numRandomico(i*l+7)) + ","
-                    + to_string(numRandomico(i*l+5)) + ","
-                    + to_string(numRandomico(i*l+13)) + "\n";
+        for (int l = 1; l <= ordem; ++l) {
+            for (int c = 1; c <= ordem; ++c){
+                if (c != ordem) {
+                    registro += to_string(numRandomico(i*c*l)) + ",";
+                }
+                else {
+                    registro += to_string(numRandomico(i*c*l)) + "\n";
+                }   
+            }  
         }  
+        
         // registra no arquivo
         arquivoCSV << registro;
         arquivoCSV.close();
