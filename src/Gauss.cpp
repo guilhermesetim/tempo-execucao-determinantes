@@ -1,32 +1,34 @@
 #include "../include/Gauss.hpp"
 #include <iostream>
 
-Gauss::Gauss(float matriz[4][4]) {
+Gauss::Gauss(std::vector<std::vector<float>> matrizN) {
 
-    for (int r = 0; r < 3; ++r ) {
-        for (int t = 1+r; t < 4; ++t) {
-            this->escalonamento(matriz, r, t);
+    int ordemMatriz = matrizN[0].size();
+
+    for (int r = 0; r < ordemMatriz-1; ++r ) {
+        for (int t = 1+r; t < ordemMatriz; ++t) {
+            this->escalonamento(matrizN, r, t, ordemMatriz);
         }
     }
 
-    this->resultado = determinante(matriz);
+    this->resultado = determinante(matrizN, ordemMatriz);
 }
 
-void Gauss::escalonamento(float matriz[4][4], int linhaR, int linhaT) {
+void Gauss::escalonamento(std::vector<std::vector<float>>& matriz, int linhaR, int linhaT, int ordemMatriz) {
    
     float x;
 
     x = (float)((0 - matriz[linhaT][linhaR]) / (float)matriz[linhaR][linhaR]);
 
-    for(int j = linhaR; j < 4; ++j)
+    for(int j = linhaR; j < ordemMatriz; ++j)
         matriz[linhaT][j] += (matriz[linhaR][j] * x);
 
 }
 
-float Gauss::determinante(float matriz[4][4]) {
+float Gauss::determinante(std::vector<std::vector<float>> matriz, int ordemMatriz) {
 
     float det = 1;
-    for (int d = 0; d < 4; d++) {
+    for (int d = 0; d < ordemMatriz; d++) {
         det*= matriz[d][d];
     }
 

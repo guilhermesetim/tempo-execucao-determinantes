@@ -35,7 +35,10 @@ int main() {
         matrizN.push_back(linha);
     }
 
-    Chio chio(matrizN);
+    //Chio chio(matrizN);
+
+    Gauss gauss(matrizN);
+    cout << "Gauss det = " << gauss.getResultado() << endl;
 
 /*    
     int quantTestes = 10,

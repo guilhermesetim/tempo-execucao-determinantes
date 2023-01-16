@@ -1,18 +1,20 @@
 #ifndef GAUSS
 #define GAUSS
 
+#include <vector>
+
 class Gauss
 {
 private:
     float resultado;
 
 public:
-    Gauss(float matriz[4][4]);
+    Gauss(std::vector<std::vector<float>> matrizN);
     float getResultado() const;
 
 private:
-    void escalonamento(float matriz[4][4], int linhaR, int linhaT);
-    float determinante(float matriz[4][4]);
+    void escalonamento(std::vector<std::vector<float>>& matriz, int linhaR, int linhaT, int ordemMatriz);
+    float determinante(std::vector<std::vector<float>> matriz, int ordemMatriz);
 };
 
 #endif
