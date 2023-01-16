@@ -37,8 +37,11 @@ int main() {
 
     //Chio chio(matrizN);
 
-    Gauss gauss(matrizN);
-    cout << "Gauss det = " << gauss.getResultado() << endl;
+    //Gauss gauss(matrizN);
+    //cout << "Gauss det = " << gauss.getResultado() << endl;
+
+    Laplace laplace(matrizN);
+    cout << "Laplace det = " << laplace.getResultado() << endl;
 
 /*    
     int quantTestes = 10,

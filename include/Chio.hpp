@@ -12,7 +12,6 @@ private:
     int sinalCofator = 1;
 
 public:
-    //Chio(float matriz[4][4]);
     Chio(std::vector<std::vector<float>> matrizN);
     float getResultado() const;
 

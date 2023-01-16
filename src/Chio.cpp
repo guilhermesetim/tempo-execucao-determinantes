@@ -1,17 +1,8 @@
 #include "../include/Chio.hpp"
 #include <iostream>
 #include <vector>
-/*
-Chio::Chio(float matriz[4][4]) {
 
-    if(matriz[0][0] != 1)
-        this->jacob(matriz);
 
-    this->matriz3(matriz);
-    float det = regra(0,0) * this->sarrus(matrizTemp3);
-    this->resultado = det;
-}
-*/
 Chio::Chio(std::vector<std::vector<float>> matrizN) {
 
     int ordemMatriz = matrizN[0].size();
