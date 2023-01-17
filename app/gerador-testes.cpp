@@ -29,7 +29,7 @@ int main() {
     // grava registros em arquivo .csv
     for (int i = 1; i <= qTestes; i++) {
         std::string registro = "";
-        std::string nomeTeste = "./csv/input/M"+ std::to_string(ordem) +"/teste" + std::to_string(i) + ".csv";
+        std::string nomeTeste = "./csv/M"+ std::to_string(ordem) +"/teste" + std::to_string(i) + ".csv";
         arquivoCSV.open(nomeTeste, std::ios::trunc);
 
         for (int l = 1; l <= ordem; ++l) {

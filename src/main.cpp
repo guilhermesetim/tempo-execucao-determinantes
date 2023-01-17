@@ -2,7 +2,6 @@
 #include <chrono>
 #include <fstream>
 #include <vector>
-#include <cmath>
 
 #include "../include/Laplace.hpp"
 #include "../include/Chio.hpp"
@@ -33,7 +32,7 @@ int main() {
         //  Testes  
         while (numTeste <= quantTestes) {            
 
-            string arquivoTeste = "./csv/input/matriz" + to_string(tamMatriz) + ".csv";
+            string arquivoTeste = "./csv/matriz" + to_string(tamMatriz) + ".csv";
             vector<vector<float>> arqCSV = transformarCSVtoMatriz(arquivoTeste, tamMatriz);
 
             
@@ -91,7 +90,7 @@ int main() {
             Criação do arquivo .csv
         */
         ofstream arquivoCSV;
-        arquivoCSV.open("./csv/output/Resultado"+ to_string(tamMatriz) +".csv", ios::trunc);
+        arquivoCSV.open("./datasets/Resultado"+ to_string(tamMatriz) +".csv", ios::trunc);
         string tabela =  "Tempo execução determinante \nteste, LaPlace, Chio, Eliminacao Gauss \n";
 
         // grava registros em arquivo .csv

@@ -1,7 +1,6 @@
 #include "../include/Chio.hpp"
 #include <vector>
 #include <cmath>
-#include <iostream>
 
 
 Chio::Chio(std::vector<std::vector<float>>& matriz) {
