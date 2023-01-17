@@ -17,30 +17,20 @@ int numRandomico(int numero);
 
 int main() {
 
-
-    
-        
-    
-
     //gerarTestes(quantTestes, 5);
     
     int tamMatriz = 4;
-    while(tamMatriz <= 7){
+    const int maxMatriz = 8;
 
+    while(tamMatriz <= maxMatriz ){
 
-
-        unsigned long int tempLaplace = 0,
-                        tempChio = 0,
-                        tempGauss = 0;
 
         vector<int> regLaplace,
                     regChio,
                     regGauss;
 
         int numTeste = 1,
-            quantTestes = 1;
-
-
+            quantTestes = 1000;
 
     
         //  Testes  
@@ -56,8 +46,9 @@ int main() {
                                 mGauss;
 
 
-            //  Inserir elementos nas matrizes 
-            vector<vector<float>> matrizN;
+            /*
+                Inserir elementos nas matrizes 
+            */
             for(int i = 0; i < tamMatriz; i++) {
                 vector<float> linha;
                 for (int j = 0; j < tamMatriz; j++) {
@@ -69,27 +60,30 @@ int main() {
             }
 
 
-            // LaPlace
+            /* 
+                LaPlace
+            */
             auto startLaplace = chrono::high_resolution_clock::now();
             Laplace laplace(mLaplace);
             auto stopLaplace = high_resolution_clock::now();
-            cout << "Laplace: " << laplace.getResultado() << endl;
             std::chrono::nanoseconds duracaoLaplace = duration_cast<nanoseconds>(stopLaplace - startLaplace);
             regLaplace.push_back(duracaoLaplace.count());
             
-            // Chio
+            /*
+                Chio
+            */
             auto startChio = chrono::high_resolution_clock::now();
             Chio chio(mChio);
             auto stopChio = high_resolution_clock::now();
-            cout << "Chio: " << chio.getResultado() << endl;
             std::chrono::nanoseconds duracaoChio = duration_cast<nanoseconds>(stopChio - startChio);
             regChio.push_back(duracaoChio.count());
 
-            // Eliminação de Gauss
+            /*
+                Eliminação de Gauss
+            */
             auto startGauss = chrono::high_resolution_clock::now();
             Gauss gauss(mGauss);
             auto stopGauss = high_resolution_clock::now();
-            cout << "Gauss: " << gauss.getResultado() << endl;
             std::chrono::nanoseconds duracaoGauss = duration_cast<nanoseconds>(stopGauss - startGauss);
             regGauss.push_back(duracaoGauss.count());
 
@@ -97,7 +91,9 @@ int main() {
         }
 
 
-        // criação do arquivo .csv com os registros de tempo 
+        /* 
+            Criação do arquivo .csv
+        */
         ofstream arquivoCSV;
         arquivoCSV.open("./csv/output/Resultado"+ to_string(tamMatriz) +".csv", ios::trunc);
         string tabela =  "Tempo execução determinante \nteste, LaPlace, Chio, Eliminacao Gauss \n";
@@ -108,23 +104,19 @@ int main() {
                             + to_string(regLaplace[t]) + ", " 
                             + to_string(regChio[t]) + ", " 
                             + to_string(regGauss[t]) + '\n';
-            
             tabela += registro;
-            tempLaplace += regLaplace[t]; 
-            tempChio += regChio[t]; 
-            tempGauss += regGauss[t];
         }
+
         // registra no arquivo
         arquivoCSV << tabela;
         arquivoCSV.close();
-        
-        // resultados
-        cout << "Duracao Laplace: " << tempLaplace << endl;
-        cout << "Duracao Chio: [" << tamMatriz << "] = " << tempChio << endl;
-        cout << "Duracao Gauss: [" << tamMatriz << "] = " << tempGauss << endl; 
 
         ++tamMatriz;
     }
+    
+
+
+
     return 0;
 }
 

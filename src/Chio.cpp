@@ -1,6 +1,7 @@
 #include "../include/Chio.hpp"
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 
 Chio::Chio(std::vector<std::vector<float>>& matriz) {
@@ -60,11 +61,15 @@ void Chio::jacob(std::vector<std::vector<float>>& matriz) {
     * e que somado a linha de referencia, 
     * torne esse elemento = 1
     */
-    x = (float)((1 - matriz[0][0]) / (float)matriz[l][0]);
+    x = ((1 - matriz[0][0]) / matriz[l][0]);
+    
 
     // modificar linhas
-    for (int j = 0; j < ordemMatriz; ++j)
-        matriz[0][j] += (matriz[l][j] * x);   
+    for (int j = 0; j < ordemMatriz; ++j){
+        matriz[0][j] += (matriz[l][j] * x); 
+    }
+        
+
 }
 
 
