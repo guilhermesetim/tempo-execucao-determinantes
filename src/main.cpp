@@ -133,7 +133,7 @@ int main() {
 
             getline(leitura, linha);
             
-            while(caracter < linha.size()) {
+            while(caracter < int(linha.size())) {
                 if(linha[caracter] != ',') {
                     valorTabela+= linha[caracter];
                 }

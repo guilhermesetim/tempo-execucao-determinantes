@@ -17,15 +17,15 @@ float Laplace::laplace(std::vector<std::vector<float>> matriz) {
     } else {
 
         // Percorre a matriz
-        for (int j = 0; j < matriz[0].size(); j++) {
+        for (int j = 0; j < int(matriz[0].size()); j++) {
             // diferente do elemento escolhido cofator
             if (matriz[0][j] != 0) {
                 std::vector<std::vector<float>> auxMatriz; // nova Matriz (n-1)
                 
                 // sempre escolhida a primeira linha 
-                for (int linha = 1; linha < matriz[0].size(); linha++) {
+                for (int linha = 1; linha < int(matriz[0].size()); linha++) {
                     std::vector<float> auxLinha;
-                    for (int coluna = 0; coluna < matriz[0].size(); coluna++) {
+                    for (int coluna = 0; coluna < int(matriz[0].size()); coluna++) {
 
                         // elimina a coluna pivô
                         if (coluna != j) {

@@ -1,3 +1,5 @@
+FLAGS = -O3 -Wall 
+
 all: compiliar linkar
 
 run:
@@ -14,7 +16,7 @@ compiliar: \
 
 
 ./obj/%.o: ./src/%.cpp
-	g++ -c $< -o $@
+	g++ $(FLAGS) -c $< -o $@
 
 
 linkar:
