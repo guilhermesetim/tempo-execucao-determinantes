@@ -12,12 +12,9 @@ using namespace std::chrono;
 using namespace std;
 
 vector<vector<float>> transformarCSVtoMatriz(string _nomeArquivo, int ordem);
-void gerarTestes(int qTestes, int ordem);
-int numRandomico(int numero);
+
 
 int main() {
-
-    //gerarTestes(quantTestes, 5);
     
     int tamMatriz = 4;
     const int maxMatriz = 8;
@@ -36,7 +33,6 @@ int main() {
         //  Testes  
         while (numTeste <= quantTestes) {            
 
-            //string arquivoTeste = "./csv/input/teste" + to_string(numTeste) + ".csv";
             string arquivoTeste = "./csv/input/matriz" + to_string(tamMatriz) + ".csv";
             vector<vector<float>> arqCSV = transformarCSVtoMatriz(arquivoTeste, tamMatriz);
 
@@ -162,39 +158,3 @@ int main() {
  
 }
 
-
-
-void gerarTestes(int qTestes, int ordem) {
-    /* criação do arquivo .csv com os registros de tempo */
-    ofstream arquivoCSV;
-
-    // grava registros em arquivo .csv
-    for (int i = 1; i <= qTestes; i++) {
-        string registro = "";
-        string nomeTeste = "./csv/input/teste" + to_string(i) + ".csv";
-        arquivoCSV.open(nomeTeste, ios::trunc);
-
-        for (int l = 1; l <= ordem; ++l) {
-            for (int c = 1; c <= ordem; ++c){
-                if (c != ordem) {
-                    registro += to_string(numRandomico(i*c*l)) + ",";
-                }
-                else {
-                    registro += to_string(numRandomico(i*c*l)) + "\n";
-                }   
-            }  
-        }  
-        
-        // registra no arquivo
-        arquivoCSV << registro;
-        arquivoCSV.close();
-    }
-    
-}
-
-int numRandomico(int numero) {
-    srand(time(NULL));
-    int numeroAleatorio =  ( 3 * (rand() * numero) ) % 10;
-
-    return numeroAleatorio ;
-}

@@ -4,13 +4,14 @@ run:
 	./bin/main.out
 
 clean:
-	rm ./obj/*.o ./bin/*.out ./csv/input/teste{?,??}.csv
+	rm ./obj/*.o ./bin/*.out
 
-compiliar:
-	g++ -c ./src/main.cpp -o ./obj/main.o
-	g++ -c ./src/Laplace.cpp -o ./obj/Laplace.o
-	g++ -c ./src/Chio.cpp -o ./obj/Chio.o
-	g++ -c ./src/Gauss.cpp -o ./obj/Gauss.o
+compiliar: main.o Laplace.o Chio.o Gauss.o
+
+
+%.o: ./src/%.cpp
+	g++ -c $< -o ./obj/$@
+
 
 linkar:
 	g++ ./obj/*.o -o ./bin/main.out
