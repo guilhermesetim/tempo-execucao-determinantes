@@ -20,7 +20,6 @@ int main() {
 
     
         
-
     
 
     //gerarTestes(quantTestes, 5);
@@ -31,8 +30,8 @@ int main() {
 
 
         unsigned long int tempLaplace = 0,
-            tempChio = 0,
-            tempGauss = 0;
+                        tempChio = 0,
+                        tempGauss = 0;
 
         vector<int> regLaplace,
                     regChio,
@@ -80,17 +79,17 @@ int main() {
             
             // Chio
             auto startChio = chrono::high_resolution_clock::now();
-            Chio chio(mChio,tamMatriz);
+            Chio chio(mChio);
             auto stopChio = high_resolution_clock::now();
-            //cout << "Chio: " << chio.getResultado() << endl;
+            cout << "Chio: " << chio.getResultado() << endl;
             std::chrono::nanoseconds duracaoChio = duration_cast<nanoseconds>(stopChio - startChio);
             regChio.push_back(duracaoChio.count());
 
             // Eliminação de Gauss
             auto startGauss = chrono::high_resolution_clock::now();
-            Gauss gauss(mGauss, tamMatriz);
+            Gauss gauss(mGauss);
             auto stopGauss = high_resolution_clock::now();
-            //cout << "Gauss: " << gauss.getResultado() << endl;
+            cout << "Gauss: " << gauss.getResultado() << endl;
             std::chrono::nanoseconds duracaoGauss = duration_cast<nanoseconds>(stopGauss - startGauss);
             regGauss.push_back(duracaoGauss.count());
 

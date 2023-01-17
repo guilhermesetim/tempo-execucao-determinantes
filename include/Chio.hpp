@@ -7,18 +7,15 @@ class Chio
 {
 private:
     float resultado;
-    std::vector<std::vector<float>> matrizAtual;
-    int sinalCofator = 1;
     int ordemMatriz;
 
 public:
-    Chio(std::vector<std::vector<float>> matrizN, int tamMatriz);
+    Chio(std::vector<std::vector<float>>& matriz);
     float getResultado() const;
 
 private:
     float sarrus(std::vector<std::vector<float>> matriz);
-    void jacob(std::vector<std::vector<float>>& matriz, int ordemMatriz);
-    int regra(int i, int j);
+    void jacob(std::vector<std::vector<float>>& matriz);
     void setOrdemMatriz(int tamMatriz);
 };
 

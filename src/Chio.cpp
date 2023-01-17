@@ -1,46 +1,46 @@
 #include "../include/Chio.hpp"
-#include <iostream>
 #include <vector>
+#include <cmath>
 
 
-Chio::Chio(std::vector<std::vector<float>> matrizN, int tamMatriz) {
+Chio::Chio(std::vector<std::vector<float>>& matriz) {
 
-    setOrdemMatriz(tamMatriz);
-
-    if(matrizN[0][0] != 1)
-        this->jacob(matrizN, ordemMatriz);
-
-    this->sinalCofator *= regra(0,0);
-
-    this->matrizAtual = matrizN;
+    setOrdemMatriz(matriz[0].size());
+    int sinalCofator = 1;
 
     while (ordemMatriz > 3)
     {
-        if(this->matrizAtual[0][0] != 1)
-            this->jacob(this->matrizAtual, ordemMatriz);
-        
-        this->sinalCofator *= regra(0,0);
+        // verifica se o primeiro elemento não é 1
+        if(matriz[0][0] != 1)
+            // se não for, transforma para a11 = 1
+            this->jacob(matriz);
 
+        // (-1)i+j
+        sinalCofator *= pow(-1, 0);
+
+        // transforma a matriz para Matriz(n-1)
        --ordemMatriz;
         std::vector<std::vector<float>> matrizSub;
 
         for (int i = 1; i <= ordemMatriz; ++i) {
             std::vector<float> linha;
             for(int j = 1; j <= ordemMatriz; ++j) {
-                float pordCoord = this->matrizAtual[i][0] * this->matrizAtual[0][j];
-                linha.push_back(this->matrizAtual[i][j] - pordCoord);
+                // formula: aij - (ai1 * a1j) 
+                float pordCoord = matriz[i][0] * matriz[0][j];
+                linha.push_back(matriz[i][j] - pordCoord);
             }
             matrizSub.push_back(linha);
         }
-
-        this->matrizAtual = matrizSub;
+        // matriz transformada
+        matriz = matrizSub;
+        
     }
-
-    this->resultado = sinalCofator * sarrus(this->matrizAtual);
+    // matriz 3x3
+    this->resultado = sinalCofator * sarrus(matriz);
 }
 
 
-void Chio::jacob(std::vector<std::vector<float>>& matriz, int ordemMatriz) {
+void Chio::jacob(std::vector<std::vector<float>>& matriz) {
    
     float x;
     int l;
@@ -53,10 +53,16 @@ void Chio::jacob(std::vector<std::vector<float>>& matriz, int ordemMatriz) {
             zero = false;
         }
     }
-    
 
+    /* x representa
+    * encontrar um multiplicador, 
+    * que multiplique o elemento a ser convertido
+    * e que somado a linha de referencia, 
+    * torne esse elemento = 1
+    */
     x = (float)((1 - matriz[0][0]) / (float)matriz[l][0]);
 
+    // modificar linhas
     for (int j = 0; j < ordemMatriz; ++j)
         matriz[0][j] += (matriz[l][j] * x);   
 }
@@ -100,15 +106,6 @@ float Chio::sarrus(std::vector<std::vector<float>> matriz) {
     return (somatorioPositivo - somatorioNegativo);
 }
 
-int Chio::regra(int i, int j) {
-    int multiplicador;
-    i+= 1;
-    j += 1;
-    // sinal - propriedade de potencia
-    ( (i+j) % 2 == 0 ) ? multiplicador = 1 : multiplicador = -1;
-    
-    return multiplicador;
-}
 
 float Chio::getResultado() const {
     return this->resultado;

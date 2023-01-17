@@ -10,12 +10,12 @@ private:
     int ordemMatriz;
 
 public:
-    Gauss(std::vector<std::vector<float>> matrizN, int ordemMatriz);
+    Gauss(std::vector<std::vector<float>> matriz);
     float getResultado() const;
 
 private:
-    void escalonamento(std::vector<std::vector<float>>& matriz, int linhaR, int linhaT, int ordemMatriz);
-    float determinante(std::vector<std::vector<float>> matriz, int ordemMatriz);
+    void escalonamento(std::vector<std::vector<float>>& matriz, int pivo, int mod);
+    float determinante(std::vector<std::vector<float>> matriz);
     void setOrdemMatriz(int tamMatriz);
 };
 

@@ -10,11 +10,10 @@ private:
 
 public:
     Laplace(std::vector<std::vector<float>> matriz);
-    float laplace(std::vector<std::vector<float>> matriz);
     float getResultado() const;
 
 private:
-    float cofator(int l, int c);
+    float laplace(std::vector<std::vector<float>> matriz);
     float sarrus(std::vector<std::vector<float>> matriz);
 };
 

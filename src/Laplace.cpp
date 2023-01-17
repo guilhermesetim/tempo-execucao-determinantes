@@ -1,5 +1,4 @@
 #include "../include/Laplace.hpp"
-#include <iostream>
 #include <vector>
 #include <cmath>
 
@@ -38,25 +37,12 @@ float Laplace::laplace(std::vector<std::vector<float>> matriz) {
                 }
 
                 // Calculo da regra de somatório das matrizes
-                determinante += cofator(0, j) * matriz[0][j] * laplace(auxMatriz);
+                determinante += pow(-1, j) * matriz[0][j] * laplace(auxMatriz);
             }
 
         }
     }
     return determinante;
-}
-
-
-
-float Laplace::cofator(int l, int c) {
-
-    int multiplicador;
-    l+= 1;
-    c += 1;
-    // sinal - propriedade de potencia
-    ( (l+c) % 2 == 0 ) ? multiplicador = 1 : multiplicador = -1;
-    
-    return multiplicador;
 }
 
 
