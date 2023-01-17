@@ -1,9 +1,9 @@
 #include "../include/Gauss.hpp"
 #include <iostream>
 
-Gauss::Gauss(std::vector<std::vector<float>> matrizN) {
+Gauss::Gauss(std::vector<std::vector<float>> matrizN, int tamMatriz) {
 
-    int ordemMatriz = matrizN[0].size();
+    setOrdemMatriz(tamMatriz);
 
     for (int r = 0; r < ordemMatriz-1; ++r ) {
         for (int t = 1+r; t < ordemMatriz; ++t) {
@@ -38,4 +38,8 @@ float Gauss::determinante(std::vector<std::vector<float>> matriz, int ordemMatri
 
 float Gauss::getResultado() const {
     return this->resultado;
+}
+
+void Gauss::setOrdemMatriz(int tamMatriz) {
+    this->ordemMatriz = tamMatriz;
 }

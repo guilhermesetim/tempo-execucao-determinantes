@@ -3,9 +3,9 @@
 #include <vector>
 
 
-Chio::Chio(std::vector<std::vector<float>> matrizN) {
+Chio::Chio(std::vector<std::vector<float>> matrizN, int tamMatriz) {
 
-    int ordemMatriz = matrizN[0].size();
+    setOrdemMatriz(tamMatriz);
 
     if(matrizN[0][0] != 1)
         this->jacob(matrizN, ordemMatriz);
@@ -112,4 +112,8 @@ int Chio::regra(int i, int j) {
 
 float Chio::getResultado() const {
     return this->resultado;
+}
+
+void Chio::setOrdemMatriz(int tamMatriz) {
+    this->ordemMatriz = tamMatriz;
 }

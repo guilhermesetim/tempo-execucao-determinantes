@@ -1,74 +1,62 @@
 #include "../include/Laplace.hpp"
 #include <iostream>
 #include <vector>
+#include <cmath>
 
-Laplace::Laplace(std::vector<std::vector<float>> matrizN) {
+Laplace::Laplace(std::vector<std::vector<float>> matriz) {
+    this->resultado = laplace(matriz);
+}
 
-    int ordemMatriz = 5;
-    int colEscolhida = coordRandomica();
-
-    
+float Laplace::laplace(std::vector<std::vector<float>> matriz) {
 
     float determinante = 0;
 
-    for(int lMaster = 0; lMaster < ordemMatriz; lMaster++) {
+    if (matriz[0].size() == 3) {
+        //calcula o determinante de matriz 3x3 por regra de Sarrus
+        determinante = sarrus(matriz);
 
-        //--ordemMatriz;
-        std::vector<std::vector<float>> matrizSub;
+    } else {
 
-        for (int i = 0; i < ordemMatriz; ++i) {
-            if (i != lMaster) {
-                std::vector<float> linha;
-                for(int j = 1; j < ordemMatriz; ++j) {
-                    
-                    linha.push_back(matrizN[i][j]);
-                    //std::cout << "[" << i << "][" << j << "] = " << matrizN[i][j] << std::endl;
+        // Percorre a matriz
+        for (int j = 0; j < matriz[0].size(); j++) {
+            // diferente do elemento escolhido cofator
+            if (matriz[0][j] != 0) {
+                std::vector<std::vector<float>> auxMatriz; // nova Matriz (n-1)
+                
+                // sempre escolhida a primeira linha 
+                for (int linha = 1; linha < matriz[0].size(); linha++) {
+                    std::vector<float> auxLinha;
+                    for (int coluna = 0; coluna < matriz[0].size(); coluna++) {
+
+                        // elimina a coluna pivô
+                        if (coluna != j) {
+                            auxLinha.push_back(matriz[linha][coluna]);
+                        }
+                        
+                    }
+                    auxMatriz.push_back(auxLinha);
                 }
-                matrizSub.push_back(linha);
+
+                // Calculo da regra de somatório das matrizes
+                determinante += cofator(0, j) * matriz[0][j] * laplace(auxMatriz);
             }
-        }        
 
-        this->matrizAtual = matrizSub;
-
-        float det = 0;
-        for(int i = 0; i < 4; i++) {
-            
-            float cofator = this->cofator(i, 0);
-            this->matriz3(i,0,this->matrizAtual);
-            float D = this->sarrus(this->matriz3x3);
-            det += matrizAtual[i][0] * (cofator * D);
         }
-        determinante += matrizN[lMaster][0] * (cofator(lMaster, 0) * det);
-
     }
-    this->resultado = determinante;    
+    return determinante;
 }
+
+
 
 float Laplace::cofator(int l, int c) {
 
-    int _C;
+    int multiplicador;
+    l+= 1;
+    c += 1;
     // sinal - propriedade de potencia
-    ( ( (l+1) + (c+1) ) % 2 == 0 ) ? _C = 1 : _C = -1;
-
-    return _C ;
-}
-
-void Laplace::matriz3(int l, int c, std::vector<std::vector<float>> matriz) {
-
-    std::vector<std::vector<float>> _matrizTemp;
-
-    for(int i = 0; i < 4; ++i) {
-        std::vector<float> linha;
-        if (i != l) // linha cofator
-        {            
-            for(int j = 1; j < 4; ++j) {
-                linha.push_back(matriz[i][j]);
-            }
-            _matrizTemp.push_back(linha);
-        }
-    }
-
-    this->matriz3x3 = _matrizTemp;
+    ( (l+c) % 2 == 0 ) ? multiplicador = 1 : multiplicador = -1;
+    
+    return multiplicador;
 }
 
 
@@ -109,12 +97,6 @@ float Laplace::sarrus(std::vector<std::vector<float>> matriz) {
     return (somatorioPositivo - somatorioNegativo);
 }
 
-int Laplace::coordRandomica() {
-    srand(time(NULL));
-    int numeroAleatorio = rand() % 4;
-
-    return numeroAleatorio;
-}
 
 float Laplace::getResultado() const {
     return this->resultado;
