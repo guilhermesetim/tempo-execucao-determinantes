@@ -20,6 +20,7 @@ Gauss::Gauss(std::vector<std::vector<float>> matriz) {
 void Gauss::escalonamento(std::vector<std::vector<float>>& matriz, int pivo, int mod) {
    
     float x;
+    
     /* x representa
     * encontrar um multiplicador, 
     * que multiplique o elemento a ser convertido

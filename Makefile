@@ -4,14 +4,23 @@ run:
 	./bin/main.out
 
 clean:
-	rm ./obj/*.o ./bin/*.out
+	rm -rf ./obj/*.o ./bin/*.out
 
-compiliar: main.o Laplace.o Chio.o Gauss.o
+compiliar: \
+	./obj/main.o \
+	./obj/Laplace.o \
+	./obj/Chio.o \
+	./obj/Gauss.o
 
 
-%.o: ./src/%.cpp
-	g++ -c $< -o ./obj/$@
+./obj/%.o: ./src/%.cpp
+	g++ -c $< -o $@
 
 
 linkar:
 	g++ ./obj/*.o -o ./bin/main.out
+
+gerar-teste: 
+	g++ -c ./app/gerador-testes.cpp -o ./app/gerador-testes.o
+	g++ ./app/gerador-testes.o -o ./app/gerador-testes.out
+	./app/gerador-testes.out
