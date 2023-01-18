@@ -91,7 +91,7 @@ int main() {
         */
         ofstream arquivoCSV;
         arquivoCSV.open("./datasets/Resultado"+ to_string(tamMatriz) +".csv", ios::trunc);
-        string tabela =  "Tempo execução determinante \nteste, LaPlace, Chio, Eliminacao Gauss \n";
+        string tabela =  "teste, LaPlace, Chio, Eliminacao Gauss \n";
 
         // grava registros em arquivo .csv
         for (int t = 0; t < quantTestes; t++) {
