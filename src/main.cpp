@@ -91,12 +91,11 @@ int main() {
         */
         ofstream arquivoCSV;
         arquivoCSV.open("./datasets/Resultado"+ to_string(tamMatriz) +".csv", ios::trunc);
-        string tabela =  "teste, LaPlace, Chio, Eliminacao Gauss \n";
+        string tabela =  "LaPlace,Chio,Gauss\n";
 
         // grava registros em arquivo .csv
         for (int t = 0; t < quantTestes; t++) {
-            string registro = to_string(t+1) + ", "
-                            + to_string(regLaplace[t]) + ", " 
+            string registro = to_string(regLaplace[t]) + ", " 
                             + to_string(regChio[t]) + ", " 
                             + to_string(regGauss[t]) + '\n';
             tabela += registro;
