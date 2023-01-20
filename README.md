@@ -84,7 +84,17 @@ As matrizes geradas automaticamente podem ser encontradas em `./csv/M` + ordem d
 ## Análise de dados
 A análise de dados realizada no jupyter notebook, em um *virtual environment* de python3, acompanhado dos pacotes Pandas, MatPlotLib e Numpy.
 
-O link para acessar a análise encontra-se em: https://github.com/guilhermesetim/tempo-execucao-determinantes/blob/main/analise-dados/analise-dados-determinantes.ipynb
+O método mais eficiente, em termos computacionais, foi o método eliminação de Gauss. Em contrapartida, o método de Teorema de LaPlace se demonstrou o menos eficiente.
+
+A tabela e o gráfico a seguir apresenta os resultados encontrados na análise de dados:
+
+### Tabela do resultado da análise
+![tabela médias dos resultados](assets/tabela-medias-resultados.png) 
+
+### Gráfico do resultado da análise
+![gráfico resultado](assets/grafico-resultado.pngdes)
+
+O link para acessar a análise completa encontra-se em: https://github.com/guilhermesetim/tempo-execucao-determinantes/blob/main/analise-dados/analise-dados-determinantes.ipynb
 
 Para executar em seu computador, realize os seguintes passos:
 
