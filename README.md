@@ -1,5 +1,7 @@
 # Análise de métodos de cálculo de determinantes
 
+link da análise de dados: https://github.com/guilhermesetim/tempo-execucao-determinantes/blob/main/analise-dados/analise-dados-determinantes.ipynb
+
 ## Sobre o projeto
 
 O projeto tem o propósito de analisar, de forma computacional, a complexidade de tempo de algoritmos de diferentes métodos de calculo de determinates, de ordem 4 em diante. Os métodos selecionados para implementação foram:
@@ -26,18 +28,25 @@ Programação Orientada ao Objeto
 - C++;
 
 ### Análise de dados
-- Python;
+- Python 3;
+- Jupyter Notebook
+
+#### Bibliotecas
 - Pandas;
 - MatPlotLib;
+- Numpy;
 
 
-## Como executar o projeto
+## Como executar o projeto do Algoritmo C++
 Requisitos:
 
 - Compilador g++;
 - Makefile;
 - Python;
+- Jupyter Notebook;
 - Pandas;
+- Numpy;
+- MatPlotLib;
 
 Realizar o clone do projeto no GitHub:
 `git clone 'https://github.com/guilhermesetim/tempo-execucao-determinantes.git' `
@@ -62,7 +71,7 @@ Encontram-se em `./datasets/`
 **Nome dos arquivos:** "Resultado" + ordem da matriz + ".csv"
 
 
-## Recursos a serem implementados
+### Recursos a serem implementados
 - [x] Gerar matrizes para testes automaticamente;
 - [ ] Validar as matrizes geradas;
 
@@ -71,6 +80,21 @@ O recurso de gerador de matrizes pode ser executado com o comando `make gerar-te
 As matrizes geradas automaticamente podem ser encontradas em `./csv/M` + ordem da matriz + `/`.
 
 ![gerador de testes automático](assets/gerador-teste.png)
+
+## Análise de dados
+A análise de dados realizada no jupyter notebook, em um *virtual environment* de python3, acompanhado dos pacotes Pandas, MatPlotLib e Numpy.
+
+O link para acessar a análise encontra-se em: https://github.com/guilhermesetim/tempo-execucao-determinantes/blob/main/analise-dados/analise-dados-determinantes.ipynb
+
+Para executar em seu computador, realize os seguintes passos:
+
+Navegue até ao diretorio do projeto: `cd tempo-execucao-determinantes/analise-dados/`
+
+Ative o *virtual environment*: `source bin/activate`
+
+Ative Jupyter Notebook: `jupyter notebook`
+
+Acesse o arquivo: `analise-dados-determinantes.ipynb`
 
 
 # Autor
