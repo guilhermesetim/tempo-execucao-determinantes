@@ -92,7 +92,7 @@ A tabela e o gráfico a seguir apresenta os resultados encontrados na análise d
 ![tabela médias dos resultados](assets/tabela-medias-resultados.png) 
 
 ### Gráfico do resultado da análise
-![gráfico resultado](assets/grafico-resultado.pngdes)
+![gráfico resultado](assets/grafico-resultado.png)
 
 O link para acessar a análise completa encontra-se em: https://github.com/guilhermesetim/tempo-execucao-determinantes/blob/main/analise-dados/analise-dados-determinantes.ipynb
 
